@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FakeInMemoryDatabase implements InMemoryDatabase {
-    List<Customer> customers = new ArrayList<>();
-    int customerIdCounter = 1;
+    private List<Customer> customers = new ArrayList<>();
+    private int customerIdCounter = 1;
     @Override
     public Customer insertIntoCustomerTable(Customer customer) {
         customer.setId(customerIdCounter++);
