@@ -2,6 +2,7 @@ package com.amaap.unusualspends.domain.model.entity;
 
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerDataException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerNameException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidEmailIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidIdException;
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +36,12 @@ class CustomerTest {
     {
         assertThrows(InvalidCustomerNameException.class,()->Customer.create(1,"A P","ashokpawar@gmail.com"));
         assertThrows(InvalidCustomerNameException.class,()->Customer.create(2,"As P","ashokpawar@gmail.com"));
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenCustomerEmailIdIsInvalid()
+    {
+        assertThrows(InvalidEmailIdException.class,()->Customer.create(1,"Ashok Pawar","ashokpawar  @gmail.com"));
+        assertThrows(InvalidEmailIdException.class,()->Customer.create(2,"Ashok Pawar","ashokpawa"));
     }
 }

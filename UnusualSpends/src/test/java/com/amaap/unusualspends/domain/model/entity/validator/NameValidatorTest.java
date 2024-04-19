@@ -3,16 +3,27 @@ package com.amaap.unusualspends.domain.model.entity.validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.amaap.unusualspends.domain.model.entity.validator.NameValidator.isValidName;
+import static com.amaap.unusualspends.domain.model.entity.validator.EmailValidator.*;
+import static com.amaap.unusualspends.domain.model.entity.validator.NameValidator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NameValidatorTest {
 
     @Test
-    void shouldBeAbleToValidateCorrectNameOfCustomer()
+    void shouldBeAbleToValidateValidNameOfCustomer()
     {
         assertTrue(isValidName("Ashok Pawar"));
         assertTrue(isValidName("Ash Paw"));
+    }
+
+    @Test
+    void shouldBeAbleToValidateAnEmptyNameOfCustomer() {
+        assertTrue(isEmptyName(""));
+    }
+
+    @Test
+    void shouldBeAbleToValidateNullNameOfCustomer() {
+        assertTrue(isNullName(null));
     }
 
     @Test
