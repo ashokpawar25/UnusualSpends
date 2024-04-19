@@ -13,6 +13,14 @@ public class Customer {
         this.email = email;
     }
 
+    public static Customer create(int id, String name, String email) {
+        return new Customer(id,name,email);
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

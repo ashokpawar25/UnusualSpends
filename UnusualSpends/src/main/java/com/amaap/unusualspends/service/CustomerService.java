@@ -10,6 +10,7 @@ public class CustomerService {
     }
 
     public Customer create(String name, String email) {
-        return new Customer(1,name,email);
+        Customer customer = Customer.create(0,name,email);
+        return customerRepository.add(customer);
     }
 }
