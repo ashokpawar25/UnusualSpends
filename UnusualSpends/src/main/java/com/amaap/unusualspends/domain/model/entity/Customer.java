@@ -1,5 +1,8 @@
 package com.amaap.unusualspends.domain.model.entity;
 
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerDataException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidIdException;
+
 import java.util.Objects;
 
 public class Customer {
@@ -13,8 +16,13 @@ public class Customer {
         this.email = email;
     }
 
-    public static Customer create(int id, String name, String email) {
+    public static Customer create(int id, String name, String email) throws InvalidCustomerDataException {
+        if(!isValidId(id)) throw new InvalidIdException("Customer id should be grater than 0 ");
         return new Customer(id,name,email);
+    }
+
+    private static boolean isValidId(int id) {
+        return id>0;
     }
 
     public void setId(int id) {

@@ -1,6 +1,7 @@
 package com.amaap.unusualspends.service;
 
 import com.amaap.unusualspends.domain.model.entity.Customer;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerDataException;
 import com.amaap.unusualspends.repository.CustomerRepository;
 import com.amaap.unusualspends.repository.db.InMemoryDatabase;
 import com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabase;
@@ -14,8 +15,7 @@ class CustomerServiceTest {
     CustomerRepository customerRepository = new InMemoryCustomerRepository(inMemoryDatabase);
     CustomerService customerService = new CustomerService(customerRepository);
     @Test
-    void shouldBeAbleToCreateCustomer()
-    {
+    void shouldBeAbleToCreateCustomer() throws InvalidCustomerDataException {
         // arrange
         int id = 1;
         String name = "Ashok Pawar";
