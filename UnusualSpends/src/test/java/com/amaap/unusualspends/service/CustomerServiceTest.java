@@ -1,18 +1,15 @@
-package com.amaap.unusualspends.controller;
+package com.amaap.unusualspends.service;
 
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.repository.CustomerRepository;
 import com.amaap.unusualspends.repository.impl.InMemoryCustomerRepository;
-import com.amaap.unusualspends.service.CustomerService;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CustomerControllerTest {
+class CustomerServiceTest {
     CustomerRepository customerRepository = new InMemoryCustomerRepository();
     CustomerService customerService = new CustomerService(customerRepository);
-    CustomerController customerController = new CustomerController(customerService);
-
     @Test
     void shouldBeAbleToCreateCustomer()
     {
@@ -23,7 +20,7 @@ public class CustomerControllerTest {
         Customer expected = new Customer(id,name,email);
 
         // act
-        Customer actual = customerController.create(name,email);
+        Customer actual = customerService.create(name,email);
 
         // assert
         assertEquals(expected,actual);
