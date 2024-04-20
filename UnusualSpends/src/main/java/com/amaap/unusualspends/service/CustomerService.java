@@ -3,6 +3,7 @@ package com.amaap.unusualspends.service;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerDataException;
 import com.amaap.unusualspends.repository.CustomerRepository;
+import com.amaap.unusualspends.service.exception.CustomerNotFoundException;
 
 public class CustomerService {
     private final CustomerRepository customerRepository;
@@ -15,7 +16,9 @@ public class CustomerService {
         return customerRepository.add(customer);
     }
 
-    public Customer find(int id) {
-        return customerRepository.findCustomer(id);
+    public Customer find(int id) throws CustomerNotFoundException {
+        Customer customer = customerRepository.findCustomer(id);
+        if(customer == null) throw new CustomerNotFoundException("Customer with id:"+id+" not found");
+        return customer;
     }
 }

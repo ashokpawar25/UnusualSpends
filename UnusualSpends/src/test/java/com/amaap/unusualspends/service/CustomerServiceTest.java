@@ -6,6 +6,7 @@ import com.amaap.unusualspends.repository.CustomerRepository;
 import com.amaap.unusualspends.repository.db.InMemoryDatabase;
 import com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.unusualspends.repository.impl.InMemoryCustomerRepository;
+import com.amaap.unusualspends.service.exception.CustomerNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +31,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    void shouldBeAbleToGetCustomerById() throws InvalidCustomerDataException {
+    void shouldBeAbleToGetCustomerById() throws InvalidCustomerDataException, CustomerNotFoundException {
         // arrange
         int id = 1;
         String name = "Ashok Pawar";
@@ -43,5 +44,10 @@ class CustomerServiceTest {
 
         // assert
         assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenCustomerForGivenIdIsNotPresentInDatabase(){
+        assertThrows(CustomerNotFoundException.class,()->customerService.find(1));
     }
 }

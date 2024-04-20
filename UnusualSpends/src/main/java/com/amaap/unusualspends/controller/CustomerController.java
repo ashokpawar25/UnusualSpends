@@ -5,6 +5,7 @@ import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerDataException;
 import com.amaap.unusualspends.service.CustomerService;
+import com.amaap.unusualspends.service.exception.CustomerNotFoundException;
 
 public class CustomerController {
     private CustomerService customerService;
@@ -22,7 +23,7 @@ public class CustomerController {
     }
 
 
-    public Customer find(int id) {
+    public Customer find(int id) throws CustomerNotFoundException {
         return customerService.find(id);
     }
 }
