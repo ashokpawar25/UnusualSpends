@@ -17,31 +17,33 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TransactionServiceTest {
     InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
     CustomerRepository customerRepository = new InMemoryCustomerRepository(inMemoryDatabase);
     CustomerService customerService = new CustomerService(customerRepository);
     CreditCardRepository creditCardRepository = new InMemoryCreditCardRepository(inMemoryDatabase);
-    CreditCardService creditCardService = new CreditCardService(creditCardRepository,customerService);
+    CreditCardService creditCardService = new CreditCardService(creditCardRepository, customerService);
     TransactionRepository transactionRepository = new InMemoryTransactionRepository(inMemoryDatabase);
     TransactionService transactionService = new TransactionService(creditCardService, transactionRepository);
+
     @Test
     void shouldBeAbleToCreateTransactionForCreditCard() throws CreditCardNotFoundException, InvalidCreditCardIdException {
         // arrange
         int cardId = 1;
         double amount = 100;
         Category category = Category.TRAVEL;
-        LocalDate date = LocalDate.of(2024,4,20);
+        LocalDate date = LocalDate.of(2024, 4, 20);
         int expected = 1;
 
         // act
         creditCardService.create();
-        int actual = transactionService.create(cardId,amount,category,date);
+        int actual = transactionService.create(cardId, amount, category, date);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -50,15 +52,20 @@ class TransactionServiceTest {
         int cardId = 1;
         double amount = 100;
         Category category = Category.TRAVEL;
-        LocalDate date = LocalDate.of(2024,4,20);
-        Transaction expected = Transaction.create(1,cardId,amount,category,date);
+        LocalDate date = LocalDate.of(2024, 4, 20);
+        Transaction expected = Transaction.create(1, cardId, amount, category, date);
 
         // act
         creditCardService.create();
-        transactionService.create(cardId,amount,category,date);
+        transactionService.create(cardId, amount, category, date);
         Transaction actual = transactionService.find(1);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionIfTransactionIsNotFoundIntoDatabase() {
+        assertThrows(TransactionNotFoundException.class, () -> transactionService.find(1));
     }
 }
