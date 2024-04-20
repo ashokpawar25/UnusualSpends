@@ -31,6 +31,10 @@ public class Transaction {
         this.id = id;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

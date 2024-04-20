@@ -9,6 +9,7 @@ import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 public class TransactionController {
@@ -32,5 +33,9 @@ public class TransactionController {
 
     public List<Transaction> getAllTransactions() {
         return transactionService.getAllTransactions();
+    }
+
+    public List<Transaction> filterTransactionsByMonth(Month month) {
+        return transactionService.filterTransactionsByMonth(month);
     }
 }

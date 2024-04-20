@@ -8,7 +8,9 @@ import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TransactionService {
     private final CreditCardService creditCardService;
@@ -36,5 +38,10 @@ public class TransactionService {
 
     public List<Transaction> getAllTransactions() {
         return transactionRepository.getAllTransactions();
+    }
+
+    public List<Transaction> filterTransactionsByMonth(Month month) {
+        List<Transaction> transactions = getAllTransactions();
+        return transactions.stream().filter(transaction -> transaction.getDate().getMonth().equals(month)).collect(Collectors.toList());
     }
 }

@@ -17,9 +17,12 @@ import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.util.List;
 
 import static com.amaap.unusualspends.domain.model.entity.builder.TransactionBuilder.getTransactions;
+import static com.amaap.unusualspends.domain.model.entity.builder.TransactionBuilder.getTransactionsForCurrentMonth;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -84,6 +87,32 @@ class TransactionServiceTest {
         transactionService.create(1,300,Category.TRAVEL,LocalDate.of(2024,4,22));
         transactionService.create(2,400,Category.GROCERIES,LocalDate.of(2024,4,23));
         List<Transaction> actual = transactionService.getAllTransactions();
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToFilterTransactionsByMonth() throws InvalidCreditCardIdException, CreditCardNotFoundException {
+        // arrange
+        List<Transaction> expected = getTransactionsForCurrentMonth();
+        Month currentMonth = LocalDate.now().getMonth();
+        Month prevMonth = currentMonth.minus(1);
+        int currentYear = LocalDate.now().getYear();
+        int prevYear = currentYear;
+        if(currentMonth == Month.JANUARY)
+        {
+            prevMonth = Month.DECEMBER;
+            prevYear = prevYear--;
+        }
+
+        // act
+        creditCardService.create();
+        creditCardService.create();
+        transactionService.create(1,200,Category.GROCERIES,LocalDate.of(currentYear,currentMonth,20));
+        transactionService.create(1,300,Category.TRAVEL,LocalDate.of(prevYear,prevMonth,22));
+        transactionService.create(2,400,Category.GROCERIES,LocalDate.of(currentYear,currentMonth,23));
+        List<Transaction> actual = transactionService.filterTransactionsByMonth(currentMonth);
 
         // assert
         assertEquals(expected,actual);
