@@ -24,4 +24,18 @@ class InMemoryCreditCardRepositoryTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToGetCreditCardById() throws InvalidCreditCardIdException {
+        // arrange
+        int id = 1;
+        CreditCard expected = new CreditCard(id);
+
+        // act
+        inMemoryCreditCardRepository.add(expected);
+        CreditCard actual = inMemoryCreditCardRepository.find(id);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

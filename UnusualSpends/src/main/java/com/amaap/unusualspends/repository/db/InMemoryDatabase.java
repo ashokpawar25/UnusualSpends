@@ -9,4 +9,6 @@ public interface InMemoryDatabase {
     Customer findCustomer(int id);
 
     int insertIntoCreditCardTable(CreditCard creditCard);
+
+    CreditCard findCreditCard(int id);
 }

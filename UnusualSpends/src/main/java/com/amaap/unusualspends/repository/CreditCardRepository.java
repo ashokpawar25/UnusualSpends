@@ -5,4 +5,6 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardId
 
 public interface CreditCardRepository {
     int add(CreditCard creditCard) throws InvalidCreditCardIdException;
+
+    CreditCard find(int id);
 }

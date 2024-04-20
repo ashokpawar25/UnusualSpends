@@ -47,11 +47,25 @@ class FakeInMemoryDatabaseTest {
     @Test
     void shouldBeAbleToCreateCreditCard() throws InvalidCreditCardIdException {
         // arrange
-        int expected = 1;
         CreditCard creditCard = new CreditCard(1);
+        int expected = 1;
 
         // act
         int actual = fakeInMemoryDatabase.insertIntoCreditCardTable(creditCard);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetCreditCardById() throws InvalidCreditCardIdException {
+        // arrange
+        int id = 1;
+        CreditCard expected = new CreditCard(id);
+
+        // act
+        fakeInMemoryDatabase.insertIntoCreditCardTable(expected);
+        CreditCard actual = fakeInMemoryDatabase.findCreditCard(id);
 
         // assert
         assertEquals(expected,actual);

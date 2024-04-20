@@ -30,4 +30,9 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
         creditCards.add(creditCard);
         return creditCard.getId();
     }
+
+    @Override
+    public CreditCard findCreditCard(int id) {
+        return creditCards.stream().filter(card -> card.getId() == id).findFirst().orElse(null);
+    }
 }
