@@ -4,6 +4,8 @@ import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 
+import java.util.List;
+
 public interface InMemoryDatabase {
     Customer insertIntoCustomerTable(Customer customer);
 
@@ -16,4 +18,6 @@ public interface InMemoryDatabase {
     int insertIntoTransactionTable(Transaction transaction);
 
     Transaction selectTransaction(int id);
+
+    List<Transaction> getAllTransactions();
 }

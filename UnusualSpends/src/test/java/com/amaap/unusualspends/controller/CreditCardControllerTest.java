@@ -3,8 +3,10 @@ package com.amaap.unusualspends.controller;
 import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
+import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerDataException;
+import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.CreditCardRepository;
 import com.amaap.unusualspends.repository.CustomerRepository;
 import com.amaap.unusualspends.repository.db.InMemoryDatabase;
@@ -16,6 +18,10 @@ import com.amaap.unusualspends.service.CustomerService;
 import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import static com.amaap.unusualspends.domain.model.entity.builder.TransactionBuilder.getTransactions;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CreditCardControllerTest {
@@ -89,5 +95,4 @@ public class CreditCardControllerTest {
         // assert
         assertEquals(expected,actual);
     }
-
 }

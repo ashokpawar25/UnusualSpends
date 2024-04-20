@@ -13,6 +13,7 @@ import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,6 +56,25 @@ class InMemoryTransactionRepositoryTest {
         creditCardService.create();
         inMemoryTransactionRepository.add(expected);
         Transaction actual = inMemoryTransactionRepository.find(1);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetAllTransactions() throws InvalidCreditCardIdException {
+        // arrange
+        Transaction transaction1 = Transaction.create(1,1,200,Category.GROCERIES,LocalDate.of(2024,4,20));
+        Transaction transaction2 = Transaction.create(2,1,200,Category.GROCERIES,LocalDate.of(2024,4,20));
+        Transaction transaction3 = Transaction.create(3,1,200,Category.GROCERIES,LocalDate.of(2024,4,20));
+        List<Transaction> expected = List.of(transaction1,transaction2,transaction3);
+
+        // act
+        creditCardService.create();
+        inMemoryTransactionRepository.add(transaction1);
+        inMemoryTransactionRepository.add(transaction2);
+        inMemoryTransactionRepository.add(transaction3);
+        List<Transaction> actual = inMemoryTransactionRepository.getAllTransactions();
 
         // assert
         assertEquals(expected,actual);

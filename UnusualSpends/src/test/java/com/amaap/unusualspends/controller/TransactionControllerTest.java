@@ -16,11 +16,14 @@ import com.amaap.unusualspends.repository.impl.InMemoryTransactionRepository;
 import com.amaap.unusualspends.service.CreditCardService;
 import com.amaap.unusualspends.service.CustomerService;
 import com.amaap.unusualspends.service.TransactionService;
+import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import static com.amaap.unusualspends.domain.model.entity.builder.TransactionBuilder.getTransactions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -36,13 +39,30 @@ public class TransactionControllerTest {
     TransactionController transactionController = new TransactionController(transactionService);
 
     @Test
-    void shouldBeAbleToCreateTransactionForCreditCard() throws InvalidCreditCardIdException {
+    void shouldBeAbleToGetOkResponseWhenCreateTransaction() throws InvalidCreditCardIdException {
         // arrange
         int cardId = 1;
         double amount = 100;
         Category category = Category.TRAVEL;
         LocalDate date = LocalDate.of(2024, 4, 20);
         Response expected = new Response(HttpStatus.OK, "Transaction created successfully");
+
+        // act
+        creditCardService.create();
+        Response actual = transactionController.create(cardId, amount, category, date);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleGetNotFoundResponseWhenInvalidCreditCardIdIsPassed() throws InvalidCreditCardIdException {
+        // arrange
+        int cardId = 2;
+        double amount = 100;
+        Category category = Category.TRAVEL;
+        LocalDate date = LocalDate.of(2024, 4, 20);
+        Response expected = new Response(HttpStatus.NOT_FOUND, "Credit card with id:"+cardId+" not found");
 
         // act
         creditCardService.create();
@@ -73,5 +93,22 @@ public class TransactionControllerTest {
     @Test
     void shouldBeAbleToThrowExceptionIfTransactionIsNotFoundIntoDatabase() {
         assertThrows(TransactionNotFoundException.class, () -> transactionController.find(1));
+    }
+
+    @Test
+    void shouldBeAbleToGetAllTransactions() throws InvalidCreditCardIdException, CreditCardNotFoundException {
+        // arrange
+        List<Transaction> expected = getTransactions();
+
+        // act
+        creditCardService.create();
+        creditCardService.create();
+        transactionController.create(1,200, Category.GROCERIES, LocalDate.of(2024,4,20));
+        transactionController.create(1,300,Category.TRAVEL,LocalDate.of(2024,4,22));
+        transactionController.create(2,400,Category.GROCERIES,LocalDate.of(2024,4,23));
+        List<Transaction> actual = transactionController.getAllTransactions();
+
+        // assert
+        assertEquals(expected,actual);
     }
 }

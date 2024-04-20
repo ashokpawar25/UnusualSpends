@@ -9,6 +9,7 @@ import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TransactionController {
     private TransactionService transactionService;
@@ -27,5 +28,9 @@ public class TransactionController {
 
     public Transaction find(int id) throws TransactionNotFoundException {
         return transactionService.find(id);
+    }
+
+    public List<Transaction> getAllTransactions() {
+        return transactionService.getAllTransactions();
     }
 }
