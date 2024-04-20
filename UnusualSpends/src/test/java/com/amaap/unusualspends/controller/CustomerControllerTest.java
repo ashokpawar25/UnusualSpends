@@ -1,5 +1,7 @@
 package com.amaap.unusualspends.controller;
 
+import com.amaap.unusualspends.controller.dto.HttpStatus;
+import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerDataException;
 import com.amaap.unusualspends.repository.CustomerRepository;
@@ -23,10 +25,26 @@ public class CustomerControllerTest {
         int id = 1;
         String name = "Ashok Pawar";
         String email = "ashokpawar@gmail.com";
+        Response expected = new Response(HttpStatus.OK,"Customer created successfully");
+
+        // act
+        Response actual = customerController.create(name,email);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetCustomerById() throws InvalidCustomerDataException {
+        // arrange
+        int id = 1;
+        String name = "Ashok Pawar";
+        String email = "ashokpawar@gmail.com";
         Customer expected = new Customer(id,name,email);
 
         // act
-        Customer actual = customerController.create(name,email);
+        customerController.create(name,email);
+        Customer actual = customerController.find(id);
 
         // assert
         assertEquals(expected,actual);

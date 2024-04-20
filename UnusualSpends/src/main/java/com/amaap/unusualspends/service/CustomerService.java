@@ -14,4 +14,8 @@ public class CustomerService {
         Customer customer = Customer.create(1,name,email);
         return customerRepository.add(customer);
     }
+
+    public Customer find(int id) {
+        return customerRepository.findCustomer(id);
+    }
 }

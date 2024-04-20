@@ -4,11 +4,7 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerData
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerNameException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidEmailIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidIdException;
-import com.amaap.unusualspends.domain.model.entity.validator.EmailValidator;
-import com.amaap.unusualspends.domain.model.entity.validator.NameValidator;
-
 import java.util.Objects;
-
 import static com.amaap.unusualspends.domain.model.entity.validator.EmailValidator.isValidEmail;
 import static com.amaap.unusualspends.domain.model.entity.validator.NameValidator.isValidName;
 
@@ -24,14 +20,18 @@ public class Customer {
     }
 
     public static Customer create(int id, String name, String email) throws InvalidCustomerDataException {
-        if(!isValidId(id)) throw new InvalidIdException("Customer id should be grater than 0 ");
-        if(!isValidName(name)) throw new InvalidCustomerNameException("Invalid customer name "+name);
-        if(!isValidEmail(email)) throw new InvalidEmailIdException("Invalid email id "+email);
-        return new Customer(id,name,email);
+        if (!isValidId(id)) throw new InvalidIdException("Customer id should be grater than 0 ");
+        if (!isValidName(name)) throw new InvalidCustomerNameException("Invalid customer name " + name);
+        if (!isValidEmail(email)) throw new InvalidEmailIdException("Invalid email id " + email);
+        return new Customer(id, name, email);
     }
 
     private static boolean isValidId(int id) {
-        return id>0;
+        return id > 0;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {

@@ -26,4 +26,21 @@ class InMemoryCustomerRepositoryTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToGetCustomerById()
+    {
+        // arrange
+        int id = 1;
+        String name = "Ashok Pawar";
+        String email = "ashokpawar@gmail.com";
+        Customer expected = new Customer(id,name,email);
+
+        // act
+        inMemoryCustomerRepository.add(expected);
+        Customer actual = inMemoryCustomerRepository.findCustomer(id);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

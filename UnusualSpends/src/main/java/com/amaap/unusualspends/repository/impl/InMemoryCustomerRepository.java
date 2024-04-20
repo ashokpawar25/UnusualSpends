@@ -15,4 +15,9 @@ public class InMemoryCustomerRepository implements CustomerRepository {
     public Customer add(Customer customer) {
         return inMemoryDatabase.insertIntoCustomerTable(customer);
     }
+
+    @Override
+    public Customer findCustomer(int id) {
+        return inMemoryDatabase.findCustomer(id);
+    }
 }

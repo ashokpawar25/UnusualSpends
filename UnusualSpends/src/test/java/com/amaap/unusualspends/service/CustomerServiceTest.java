@@ -28,4 +28,20 @@ class CustomerServiceTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToGetCustomerById() throws InvalidCustomerDataException {
+        // arrange
+        int id = 1;
+        String name = "Ashok Pawar";
+        String email = "ashokpawar@gmail.com";
+        Customer expected = new Customer(id,name,email);
+
+        // act
+        customerService.create(name,email);
+        Customer actual = customerService.find(id);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

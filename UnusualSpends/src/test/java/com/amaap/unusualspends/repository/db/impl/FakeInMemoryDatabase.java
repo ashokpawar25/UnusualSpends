@@ -15,4 +15,9 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
         customers.add(customer);
         return customer;
     }
+
+    @Override
+    public Customer findCustomer(int id) {
+        return customers.stream().filter(customer -> customer.getId()==id).findFirst().orElse(null);
+    }
 }

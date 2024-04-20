@@ -24,4 +24,21 @@ class FakeInMemoryDatabaseTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToGetCustomerById()
+    {
+        // arrange
+        int id = 1;
+        String name = "Ashok Pawar";
+        String email = "ashokpawar@gmail.com";
+        Customer expected = new Customer(id,name,email);
+
+        // act
+        fakeInMemoryDatabase.insertIntoCustomerTable(expected);
+        Customer actual = fakeInMemoryDatabase.findCustomer(id);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }
