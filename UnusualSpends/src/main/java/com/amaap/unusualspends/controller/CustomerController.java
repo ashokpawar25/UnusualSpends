@@ -8,7 +8,7 @@ import com.amaap.unusualspends.service.CustomerService;
 import com.amaap.unusualspends.service.exception.CustomerNotFoundException;
 
 public class CustomerController {
-    private CustomerService customerService;
+    private final CustomerService customerService;
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }

@@ -1,6 +1,8 @@
 package com.amaap.unusualspends.repository.db.impl;
 
+import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.repository.db.InMemoryDatabase;
 import com.amaap.unusualspends.repository.impl.InMemoryCustomerRepository;
 import org.junit.jupiter.api.Test;
@@ -37,6 +39,19 @@ class FakeInMemoryDatabaseTest {
         // act
         fakeInMemoryDatabase.insertIntoCustomerTable(expected);
         Customer actual = fakeInMemoryDatabase.findCustomer(id);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToCreateCreditCard() throws InvalidCreditCardIdException {
+        // arrange
+        int expected = 1;
+        CreditCard creditCard = new CreditCard(1);
+
+        // act
+        int actual = fakeInMemoryDatabase.insertIntoCreditCardTable(creditCard);
 
         // assert
         assertEquals(expected,actual);
