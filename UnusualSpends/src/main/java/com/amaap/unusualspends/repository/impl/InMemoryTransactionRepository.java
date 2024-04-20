@@ -14,4 +14,9 @@ public class InMemoryTransactionRepository implements TransactionRepository {
     public int add(Transaction transaction) {
         return inMemoryDatabase.insertIntoTransactionTable(transaction);
     }
+
+    @Override
+    public Transaction find(int id) {
+        return inMemoryDatabase.selectTransaction(id);
+    }
 }

@@ -41,4 +41,22 @@ class InMemoryTransactionRepositoryTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToGetTransactionById() throws InvalidCreditCardIdException {
+        // arrange
+        int cardId = 1;
+        double amount = 100;
+        Category category = Category.TRAVEL;
+        LocalDate date = LocalDate.of(2024,4,20);
+        Transaction expected = Transaction.create(1,cardId,amount,category,date);
+
+        // act
+        creditCardService.create();
+        inMemoryTransactionRepository.add(expected);
+        Transaction actual = inMemoryTransactionRepository.find(1);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

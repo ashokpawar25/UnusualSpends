@@ -2,9 +2,11 @@ package com.amaap.unusualspends.controller;
 
 import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
+import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.service.TransactionService;
 import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
+import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
 
 import java.time.LocalDate;
 
@@ -21,5 +23,9 @@ public class TransactionController {
         } catch (CreditCardNotFoundException e) {
             return new Response(HttpStatus.NOT_FOUND, e.getMessage());
         }
+    }
+
+    public Transaction find(int id) throws TransactionNotFoundException {
+        return transactionService.find(id);
     }
 }

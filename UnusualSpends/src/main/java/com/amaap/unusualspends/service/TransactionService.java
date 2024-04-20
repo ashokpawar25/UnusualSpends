@@ -5,6 +5,7 @@ import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.TransactionRepository;
 import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
+import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
 
 import java.time.LocalDate;
 
@@ -24,5 +25,11 @@ public class TransactionService {
         }
         Transaction transaction = Transaction.create(1, cardId, amount, category, date);
         return transactionRepository.add(transaction);
+    }
+
+    public Transaction find(int id) throws TransactionNotFoundException {
+        Transaction transaction = transactionRepository.find(id);
+        if(transaction == null) throw new TransactionNotFoundException("Transaction with id:"+id+" not found");
+        return transaction;
     }
 }

@@ -14,4 +14,6 @@ public interface InMemoryDatabase {
     CreditCard findCreditCard(int id);
 
     int insertIntoTransactionTable(Transaction transaction);
+
+    Transaction selectTransaction(int id);
 }

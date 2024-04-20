@@ -4,4 +4,6 @@ import com.amaap.unusualspends.domain.model.entity.Transaction;
 
 public interface TransactionRepository {
     int add(Transaction transaction);
+
+    Transaction find(int id);
 }

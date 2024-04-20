@@ -12,6 +12,7 @@ import com.amaap.unusualspends.repository.impl.InMemoryCreditCardRepository;
 import com.amaap.unusualspends.repository.impl.InMemoryCustomerRepository;
 import com.amaap.unusualspends.repository.impl.InMemoryTransactionRepository;
 import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
+import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -38,6 +39,24 @@ class TransactionServiceTest {
         // act
         creditCardService.create();
         int actual = transactionService.create(cardId,amount,category,date);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetTransactionById() throws CreditCardNotFoundException, InvalidCreditCardIdException, TransactionNotFoundException {
+        // arrange
+        int cardId = 1;
+        double amount = 100;
+        Category category = Category.TRAVEL;
+        LocalDate date = LocalDate.of(2024,4,20);
+        Transaction expected = Transaction.create(1,cardId,amount,category,date);
+
+        // act
+        creditCardService.create();
+        transactionService.create(cardId,amount,category,date);
+        Transaction actual = transactionService.find(1);
 
         // assert
         assertEquals(expected,actual);
