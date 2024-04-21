@@ -2,6 +2,8 @@ package com.amaap.unusualspends.service;
 
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionDataException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.TransactionRepository;
 import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
@@ -21,7 +23,7 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
     }
 
-    public int create(int cardId, double amount, Category category, LocalDate date) throws CreditCardNotFoundException {
+    public int create(int cardId, double amount, Category category, LocalDate date) throws CreditCardNotFoundException, InvalidTransactionDataException, InvalidCreditCardIdException {
         CreditCard creditCard = creditCardService.find(cardId);
         if (creditCard == null) {
             return -1;

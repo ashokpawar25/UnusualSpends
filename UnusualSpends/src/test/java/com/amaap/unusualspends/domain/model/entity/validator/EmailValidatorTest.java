@@ -1,12 +1,10 @@
 package com.amaap.unusualspends.domain.model.entity.validator;
 
-import com.amaap.unusualspends.domain.model.entity.Customer;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidEmailIdException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.amaap.unusualspends.domain.model.entity.validator.EmailValidator.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EmailValidatorTest {
 

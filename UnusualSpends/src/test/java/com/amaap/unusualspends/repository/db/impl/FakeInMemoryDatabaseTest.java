@@ -4,6 +4,7 @@ import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionDataException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.CreditCardRepository;
 import com.amaap.unusualspends.repository.CustomerRepository;
@@ -87,7 +88,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToAddTransactionForCreditCard() throws InvalidCreditCardIdException {
+    void shouldBeAbleToAddTransactionForCreditCard() throws InvalidCreditCardIdException, InvalidTransactionDataException {
         // arrange
         int cardId = 1;
         double amount = 100;
@@ -105,7 +106,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToGetTransactionById() throws InvalidCreditCardIdException {
+    void shouldBeAbleToGetTransactionById() throws InvalidCreditCardIdException, InvalidTransactionDataException {
         // arrange
         int cardId = 1;
         double amount = 100;
@@ -123,7 +124,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToGetAllTransactions() throws InvalidCreditCardIdException {
+    void shouldBeAbleToGetAllTransactions() throws InvalidCreditCardIdException, InvalidTransactionDataException {
         // arrange
         Transaction transaction1 = Transaction.create(1,1,200,Category.GROCERIES,LocalDate.of(2024,4,20));
         Transaction transaction2 = Transaction.create(2,1,200,Category.GROCERIES,LocalDate.of(2024,4,20));

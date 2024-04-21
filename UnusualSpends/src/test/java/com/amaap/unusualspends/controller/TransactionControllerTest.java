@@ -5,6 +5,7 @@ import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.builder.TransactionBuilder;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionDataException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.CreditCardRepository;
 import com.amaap.unusualspends.repository.CustomerRepository;
@@ -76,7 +77,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    void shouldBeAbleToGetTransactionById() throws InvalidCreditCardIdException, TransactionNotFoundException {
+    void shouldBeAbleToGetTransactionById() throws InvalidCreditCardIdException, TransactionNotFoundException, InvalidTransactionDataException {
         // arrange
         int cardId = 1;
         double amount = 100;
@@ -99,7 +100,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    void shouldBeAbleToGetAllTransactions() throws InvalidCreditCardIdException, CreditCardNotFoundException {
+    void shouldBeAbleToGetAllTransactions() throws InvalidCreditCardIdException, CreditCardNotFoundException, InvalidTransactionDataException {
         // arrange
         List<Transaction> expected = getTransactions();
 
@@ -116,7 +117,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    void shouldBeAbleToFilterTransactionsByMonth() throws InvalidCreditCardIdException, CreditCardNotFoundException {
+    void shouldBeAbleToFilterTransactionsByMonth() throws InvalidCreditCardIdException, CreditCardNotFoundException, InvalidTransactionDataException {
         // arrange
         List<Transaction> expected = getTransactionsForCurrentMonth();
         Month currentMonth = LocalDate.now().getMonth();

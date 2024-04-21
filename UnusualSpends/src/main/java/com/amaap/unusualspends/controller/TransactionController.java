@@ -3,6 +3,8 @@ package com.amaap.unusualspends.controller;
 import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionDataException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.service.TransactionService;
 import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
@@ -24,6 +26,10 @@ public class TransactionController {
             return new Response(HttpStatus.OK,"Transaction created successfully");
         } catch (CreditCardNotFoundException e) {
             return new Response(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (InvalidTransactionDataException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidCreditCardIdException e) {
+            throw new RuntimeException(e);
         }
     }
 
