@@ -40,6 +40,18 @@ public class Transaction {
         this.id = id;
     }
 
+    public int getCardId() {
+        return cardId;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
     public LocalDate getDate() {
         return date;
     }
