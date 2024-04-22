@@ -3,8 +3,7 @@ package com.amaap.unusualspends.domain.model.entity.validator;
 import org.junit.jupiter.api.Test;
 
 import static com.amaap.unusualspends.domain.model.entity.validator.EmailValidator.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EmailValidatorTest {
 
@@ -22,10 +21,19 @@ class EmailValidatorTest {
     void shouldBeAbleToValidateNullEmailId() {
         assertTrue(isNullEmailId(null));
     }
+    @Test
+    void shouldBeAbleToCreateInstanceOfClass()
+    {
+        // arrange
+        EmailValidator emailValidator = new EmailValidator();
+
+        // act & assert
+        assertNotNull(emailValidator);
+    }
 
     @Test
     void shouldBeAbleToValidateIncorrectEmailId() {
-        assertFalse(isValidEmail("ashok"));
+        assertFalse(EmailValidator.isValidEmail("ashok"));
         assertFalse(isValidEmail("ashok@"));
         assertFalse(isValidEmail("@gmail"));
         assertFalse(isValidEmail("."));

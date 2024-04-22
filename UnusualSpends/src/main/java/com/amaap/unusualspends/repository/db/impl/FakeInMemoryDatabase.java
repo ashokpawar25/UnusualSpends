@@ -14,7 +14,7 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
     private List<Transaction> transactions = new ArrayList<>();
     private int customerIdCounter = 1;
     private int creditCardIdCounter = 1;
-    private int transactinIdCounter = 1;
+    private int transactionIdCounter = 1;
     @Override
     public Customer insertIntoCustomerTable(Customer customer) {
         customer.setId(customerIdCounter++);
@@ -41,7 +41,7 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
 
     @Override
     public int insertIntoTransactionTable(Transaction transaction) {
-        transaction.setId(transactinIdCounter++);
+        transaction.setId(transactionIdCounter++);
         transactions.add(transaction);
         return transaction.getId();
     }

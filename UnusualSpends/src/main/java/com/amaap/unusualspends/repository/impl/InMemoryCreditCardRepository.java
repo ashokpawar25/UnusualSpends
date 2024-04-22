@@ -6,7 +6,7 @@ import com.amaap.unusualspends.repository.CreditCardRepository;
 import com.amaap.unusualspends.repository.db.InMemoryDatabase;
 
 public class InMemoryCreditCardRepository implements CreditCardRepository {
-    private InMemoryDatabase inMemoryDatabase;
+    private final InMemoryDatabase inMemoryDatabase;
     public InMemoryCreditCardRepository(InMemoryDatabase inMemoryDatabase) {
         this.inMemoryDatabase = inMemoryDatabase;
     }

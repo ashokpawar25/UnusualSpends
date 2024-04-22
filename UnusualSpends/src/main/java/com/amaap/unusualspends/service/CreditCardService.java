@@ -8,8 +8,8 @@ import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import com.amaap.unusualspends.service.exception.CustomerNotFoundException;
 
 public class CreditCardService {
-    CreditCardRepository creditCardRepository;
-    CustomerService customerService;
+    private final CreditCardRepository creditCardRepository;
+    private final CustomerService customerService;
     public CreditCardService(CreditCardRepository creditCardRepository,CustomerService customerService) {
         this.creditCardRepository = creditCardRepository;
         this.customerService = customerService;
@@ -25,14 +25,17 @@ public class CreditCardService {
         return creditCard;
     }
 
-    public boolean mapCustomer(int cardId, int customerId) throws CreditCardNotFoundException, CustomerNotFoundException {
-        CreditCard creditCard = find(cardId);
-        Customer customer = customerService.find(customerId);
-        if(creditCard != null && customer != null)
-        {
-            creditCard.setCustomer(customer);
-            return true;
+    public boolean mapCustomer(int cardId, int customerId){
+        try {
+            CreditCard creditCard = find(cardId);
+            Customer customer = customerService.find(customerId);
+            if(creditCard != null && customer != null)
+            {
+                creditCard.setCustomer(customer);
+            }
+        } catch (CustomerNotFoundException | CreditCardNotFoundException e) {
+            return false;
         }
-        return false;
+        return true;
     }
 }

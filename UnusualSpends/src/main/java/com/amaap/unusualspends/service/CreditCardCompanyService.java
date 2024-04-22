@@ -28,17 +28,23 @@ public class CreditCardCompanyService {
 
     }
 
-    public void sendEmail(Map<Integer, List<SpendRecordDto>> spendRecord) throws CreditCardNotFoundException, InvalidEmailIdException, InvalidEmailSubjectException, InvalidEmailBodyException {
-        for(Map.Entry<Integer, List<SpendRecordDto>> entry : spendRecord.entrySet())
-        {
-            int cardId = entry.getKey();
-            CreditCard creditCard = creditCardService.find(cardId);
-            String email = creditCard.getCustomer().getEmail();
-            String name = creditCard.getCustomer().getName();
-            String subject = "Regarding unusual spend for current month";
-            List<SpendRecordDto> record = entry.getValue();
-            String body = composeEmail(name, record);
-            EmailSender.sendEmail(subject,body,email);
+    public boolean sendEmail(Map<Integer, List<SpendRecordDto>> spendRecord) {
+        try {
+            for(Map.Entry<Integer, List<SpendRecordDto>> entry : spendRecord.entrySet())
+            {
+                int cardId = entry.getKey();
+                CreditCard creditCard = creditCardService.find(cardId);
+                String email = creditCard.getCustomer().getEmail();
+                String name = creditCard.getCustomer().getName();
+                String subject = "Regarding unusual spend for current month";
+                List<SpendRecordDto> record = entry.getValue();
+                String body = composeEmail(name, record);
+                EmailSender.sendEmail(subject,body,email);
+            }
+        } catch (InvalidEmailIdException | InvalidEmailSubjectException | CreditCardNotFoundException |
+                 InvalidEmailBodyException e) {
+            return false;
         }
+        return true;
     }
 }

@@ -4,14 +4,16 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerData
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerNameException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidEmailIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidIdException;
+
 import java.util.Objects;
+
 import static com.amaap.unusualspends.domain.model.entity.validator.EmailValidator.isValidEmail;
 import static com.amaap.unusualspends.domain.model.entity.validator.NameValidator.isValidName;
 
 public class Customer {
     private int id;
-    private String name;
-    private String email;
+    private final String name;
+    private final String email;
 
     public Customer(int id, String name, String email) {
         this.id = id;

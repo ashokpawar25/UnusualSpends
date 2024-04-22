@@ -15,7 +15,7 @@ import java.time.Month;
 import java.util.List;
 
 public class TransactionController {
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
@@ -26,10 +26,8 @@ public class TransactionController {
             return new Response(HttpStatus.OK,"Transaction created successfully");
         } catch (CreditCardNotFoundException e) {
             return new Response(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (InvalidTransactionDataException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidCreditCardIdException e) {
-            throw new RuntimeException(e);
+        } catch (InvalidTransactionDataException | InvalidCreditCardIdException e) {
+            return new Response(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 

@@ -24,12 +24,11 @@ public class CreditCardCompanyController {
     }
 
     public Response sendEmail(Map<Integer, List<SpendRecordDto>> spendRecord) {
-        try {
-            creditCardCompanyService.sendEmail(spendRecord);
-            return new Response(HttpStatus.OK,"Email sent successfully");
-        } catch (InvalidEmailIdException | InvalidEmailSubjectException | CreditCardNotFoundException |
-                 InvalidEmailBodyException e) {
-            return new Response(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+            boolean isSent = creditCardCompanyService.sendEmail(spendRecord);
+            if(isSent){
+                return new Response(HttpStatus.OK,"Email sent successfully");
+            }
+            return new Response(HttpStatus.BAD_REQUEST,"Error sending Email");
+
     }
 }

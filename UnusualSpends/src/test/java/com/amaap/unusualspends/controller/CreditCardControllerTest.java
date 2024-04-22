@@ -85,7 +85,7 @@ public class CreditCardControllerTest {
         // arrange
         int cardId = 1;
         int customerId = 2;
-        Response expected = new Response(HttpStatus.NOT_FOUND,"Customer with id:"+customerId+" not found");
+        Response expected = new Response(HttpStatus.NOT_FOUND,"Error mapping customer");
 
         // act
         creditCardService.create();

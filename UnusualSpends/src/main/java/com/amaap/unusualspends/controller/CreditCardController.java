@@ -29,11 +29,10 @@ public class CreditCardController {
     }
 
     public Response mapCustomer(int cardId, int customerId) {
-        try {
-            creditCardService.mapCustomer(cardId,customerId);
-            return new Response(HttpStatus.OK,"Card is Assigned to customer successfully");
-        } catch (CustomerNotFoundException | CreditCardNotFoundException e) {
-            return new Response(HttpStatus.NOT_FOUND, e.getMessage());
-        }
+            boolean isMapped = creditCardService.mapCustomer(cardId, customerId);
+            if(isMapped) {
+                return new Response(HttpStatus.OK, "Card is Assigned to customer successfully");
+            }
+            return new Response(HttpStatus.NOT_FOUND, "Error mapping customer");
     }
 }

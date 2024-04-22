@@ -44,4 +44,14 @@ class NameValidatorTest {
         assertFalse(isValidName("Abca@b"));
         assertFalse(isValidName(" rAbca@b"));
     }
+
+    @Test
+    void shouldBeAbleToCreateInstanceOfClass()
+    {
+        // arrange
+        NameValidator nameValidator = new NameValidator();
+
+        // act & assert
+        assertNotNull(nameValidator);
+    }
 }

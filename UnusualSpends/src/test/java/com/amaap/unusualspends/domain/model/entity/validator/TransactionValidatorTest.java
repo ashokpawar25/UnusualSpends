@@ -46,4 +46,14 @@ class TransactionValidatorTest {
         assertFalse(isValidDate(null));
     }
 
+    @Test
+    void ShouldBeAbleToCreateInstanceOfClass()
+    {
+        // arrange
+        TransactionValidator transactionValidator = new TransactionValidator();
+
+        // act & assert
+        assertNotNull(transactionValidator);
+    }
+
 }
