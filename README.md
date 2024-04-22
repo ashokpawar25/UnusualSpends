@@ -23,17 +23,17 @@ Extensions -
 # domain Package - It consist domain models and domain services
 ## model.entity Package - It consist all the entities
 
-# Customer
-## States
+## Customer
+### States
 - `private int id`
 - `private final String name`
 - `private final String email`
 
-## Constructors
+### Constructors
 - `public Customer(int id, String name, String email)`
 -  `public static Customer create(int id, String name, String email)`
 
-## Behaviors
+### Behaviors
 - `getters and setters`
 
 
