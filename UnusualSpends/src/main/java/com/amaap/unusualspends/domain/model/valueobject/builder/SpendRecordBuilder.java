@@ -12,9 +12,9 @@ public class SpendRecordBuilder {
     public static Map<Integer, List<SpendRecordDto>> getSpendRecords() {
         Map<Integer, List<SpendRecordDto>> spendRecords = new HashMap<>();
         List<SpendRecordDto> records = new ArrayList<>();
-        records.add(new SpendRecordDto(Category.GROCERIES,400,100));
-        records.add(new SpendRecordDto(Category.TRAVEL,600,200));
-        spendRecords.put(1,records);
+        records.add(new SpendRecordDto(Category.GROCERIES, 400, 100));
+        records.add(new SpendRecordDto(Category.TRAVEL, 600, 200));
+        spendRecords.put(1, records);
         return spendRecords;
     }
 }

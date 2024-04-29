@@ -10,45 +10,39 @@ import static org.junit.jupiter.api.Assertions.*;
 class TransactionValidatorTest {
 
     @Test
-    void shouldBeAbleToValidateTransactionId()
-    {
+    void shouldBeAbleToValidateTransactionId() {
         assertTrue(isValidId(1));
         assertFalse(isValidId(0));
         assertFalse(isValidId(-1));
     }
 
     @Test
-    void shouldBeAbleToValidateCreditCardId()
-    {
+    void shouldBeAbleToValidateCreditCardId() {
         assertTrue(isValidCardId(1));
         assertFalse(isValidCardId(0));
         assertFalse(isValidCardId(-1));
     }
 
     @Test
-    void shouldBeAbleToValidateTransactionAmount()
-    {
+    void shouldBeAbleToValidateTransactionAmount() {
         assertTrue(isValidAmount(1));
         assertFalse(isValidAmount(0));
         assertFalse(isValidAmount(-1));
     }
 
     @Test
-    void shouldBeAbleToValidateTransactionCategory()
-    {
+    void shouldBeAbleToValidateTransactionCategory() {
         assertFalse(isValidCategory(null));
     }
 
     @Test
-    void shouldBeAbleToValidateTransactionDate()
-    {
-        assertTrue(isValidDate(LocalDate.of(2024,4,22)));
+    void shouldBeAbleToValidateTransactionDate() {
+        assertTrue(isValidDate(LocalDate.of(2024, 4, 22)));
         assertFalse(isValidDate(null));
     }
 
     @Test
-    void ShouldBeAbleToCreateInstanceOfClass()
-    {
+    void ShouldBeAbleToCreateInstanceOfClass() {
         // arrange
         TransactionValidator transactionValidator = new TransactionValidator();
 

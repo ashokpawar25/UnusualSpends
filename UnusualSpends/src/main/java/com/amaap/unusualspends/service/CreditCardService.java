@@ -6,11 +6,14 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardId
 import com.amaap.unusualspends.repository.CreditCardRepository;
 import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import com.amaap.unusualspends.service.exception.CustomerNotFoundException;
+import jakarta.inject.Inject;
 
 public class CreditCardService {
     private final CreditCardRepository creditCardRepository;
     private final CustomerService customerService;
-    public CreditCardService(CreditCardRepository creditCardRepository,CustomerService customerService) {
+
+    @Inject
+    public CreditCardService(CreditCardRepository creditCardRepository, CustomerService customerService) {
         this.creditCardRepository = creditCardRepository;
         this.customerService = customerService;
     }
@@ -21,18 +24,16 @@ public class CreditCardService {
 
     public CreditCard find(int id) throws CreditCardNotFoundException {
         CreditCard creditCard = creditCardRepository.find(id);
-        if(creditCard == null) throw new CreditCardNotFoundException("Credit card with id:"+id+" not found");
+        if (creditCard == null) throw new CreditCardNotFoundException("Credit card with id:" + id + " not found");
         return creditCard;
     }
 
-    public boolean mapCustomer(int cardId, int customerId){
+    public boolean mapCustomer(int cardId, int customerId) {
         try {
             CreditCard creditCard = find(cardId);
             Customer customer = customerService.find(customerId);
-            if(creditCard != null && customer != null)
-            {
-                creditCard.setCustomer(customer);
-            }
+            creditCard.setCustomer(customer);
+
         } catch (CustomerNotFoundException | CreditCardNotFoundException e) {
             return false;
         }

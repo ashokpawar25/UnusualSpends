@@ -1,17 +1,24 @@
 package com.amaap.unusualspends.repository.impl;
 
+import com.amaap.unusualspends.InMemoryModule;
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
-import com.amaap.unusualspends.repository.CreditCardRepository;
-import com.amaap.unusualspends.repository.db.InMemoryDatabase;
-import com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabase;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryCreditCardRepositoryTest {
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    InMemoryCreditCardRepository inMemoryCreditCardRepository = new InMemoryCreditCardRepository(inMemoryDatabase);
+    InMemoryCreditCardRepository inMemoryCreditCardRepository;
+
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new InMemoryModule());
+        inMemoryCreditCardRepository = injector.getInstance(InMemoryCreditCardRepository.class);
+    }
+
     @Test
     void shouldBeAbleToCreateCreditCard() throws InvalidCreditCardIdException {
         // arrange
@@ -22,7 +29,7 @@ class InMemoryCreditCardRepositoryTest {
         int actual = inMemoryCreditCardRepository.add(creditCard);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -36,6 +43,6 @@ class InMemoryCreditCardRepositoryTest {
         CreditCard actual = inMemoryCreditCardRepository.find(id);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 }

@@ -9,6 +9,7 @@ import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.service.TransactionService;
 import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
+import jakarta.inject.Inject;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -16,14 +17,16 @@ import java.util.List;
 
 public class TransactionController {
     private final TransactionService transactionService;
+
+    @Inject
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
 
     public Response create(int cardId, double amount, Category category, LocalDate date) {
-        try{
-            transactionService.create(cardId,amount,category,date);
-            return new Response(HttpStatus.OK,"Transaction created successfully");
+        try {
+            transactionService.create(cardId, amount, category, date);
+            return new Response(HttpStatus.OK, "Transaction created successfully");
         } catch (CreditCardNotFoundException e) {
             return new Response(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (InvalidTransactionDataException | InvalidCreditCardIdException e) {

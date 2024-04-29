@@ -2,8 +2,7 @@ package com.amaap.unusualspends.domain.model.entity.validator;
 
 public class NameValidator {
     public static boolean isValidName(String name) {
-        if(!isNullName(name) && !isEmptyName(name) && !isInvalidName(name))
-        {
+        if (!isNullName(name) && !isEmptyName(name) && !isInvalidName(name)) {
             return true;
         }
         return false;

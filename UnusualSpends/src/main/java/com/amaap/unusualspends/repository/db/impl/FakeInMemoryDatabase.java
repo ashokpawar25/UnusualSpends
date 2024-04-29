@@ -15,6 +15,7 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
     private int customerIdCounter = 1;
     private int creditCardIdCounter = 1;
     private int transactionIdCounter = 1;
+
     @Override
     public Customer insertIntoCustomerTable(Customer customer) {
         customer.setId(customerIdCounter++);
@@ -24,7 +25,7 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
 
     @Override
     public Customer findCustomer(int id) {
-        return customers.stream().filter(customer -> customer.getId()==id).findFirst().orElse(null);
+        return customers.stream().filter(customer -> customer.getId() == id).findFirst().orElse(null);
     }
 
     @Override

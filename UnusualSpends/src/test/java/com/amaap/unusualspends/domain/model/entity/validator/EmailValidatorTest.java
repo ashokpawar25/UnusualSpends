@@ -21,9 +21,9 @@ class EmailValidatorTest {
     void shouldBeAbleToValidateNullEmailId() {
         assertTrue(isNullEmailId(null));
     }
+
     @Test
-    void shouldBeAbleToCreateInstanceOfClass()
-    {
+    void shouldBeAbleToCreateInstanceOfClass() {
         // arrange
         EmailValidator emailValidator = new EmailValidator();
 
@@ -33,6 +33,8 @@ class EmailValidatorTest {
 
     @Test
     void shouldBeAbleToValidateIncorrectEmailId() {
+        assertFalse(EmailValidator.isValidEmail(null));
+        assertFalse(EmailValidator.isValidEmail(""));
         assertFalse(EmailValidator.isValidEmail("ashok"));
         assertFalse(isValidEmail("ashok@"));
         assertFalse(isValidEmail("@gmail"));

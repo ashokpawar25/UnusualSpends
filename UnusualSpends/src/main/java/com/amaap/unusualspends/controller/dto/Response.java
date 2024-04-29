@@ -5,9 +5,14 @@ import java.util.Objects;
 public class Response {
     private final HttpStatus httpStatus;
     private final String message;
+
     public Response(HttpStatus httpStatus, String message) {
         this.httpStatus = httpStatus;
         this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     @Override

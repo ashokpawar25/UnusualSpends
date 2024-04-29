@@ -11,13 +11,13 @@ import java.util.Map;
 
 public class SpendAnalyzer {
     public static Map<Integer, List<SpendRecordDto>> analyzeSpend(List<Transaction> currentMonthTransactions, List<Transaction> previousMonthTransactions, double thresholdPercentage) {
-        double criteria = 1 + (thresholdPercentage/100);
+        double criteria = 1 + (thresholdPercentage / 100);
         Map<Integer, List<SpendRecordDto>> spendRecords = new HashMap<>();
         for (Transaction currentTransaction : currentMonthTransactions) {
             for (Transaction previousTransaction : previousMonthTransactions) {
                 if (currentTransaction.getCategory() == previousTransaction.getCategory() &&
                         currentTransaction.getCardId() == previousTransaction.getCardId() &&
-                        currentTransaction.getAmount() > previousTransaction.getAmount()*criteria) {
+                        currentTransaction.getAmount() > previousTransaction.getAmount() * criteria) {
 
                     int cardId = currentTransaction.getCardId();
                     Category category = currentTransaction.getCategory();

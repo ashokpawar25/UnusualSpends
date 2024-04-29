@@ -8,6 +8,7 @@ import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.TransactionRepository;
 import com.amaap.unusualspends.service.exception.CreditCardNotFoundException;
 import com.amaap.unusualspends.service.exception.TransactionNotFoundException;
+import jakarta.inject.Inject;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -18,6 +19,7 @@ public class TransactionService {
     private final CreditCardService creditCardService;
     private final TransactionRepository transactionRepository;
 
+    @Inject
     public TransactionService(CreditCardService creditCardService, TransactionRepository transactionRepository) {
         this.creditCardService = creditCardService;
         this.transactionRepository = transactionRepository;
@@ -34,7 +36,7 @@ public class TransactionService {
 
     public Transaction find(int id) throws TransactionNotFoundException {
         Transaction transaction = transactionRepository.find(id);
-        if(transaction == null) throw new TransactionNotFoundException("Transaction with id:"+id+" not found");
+        if (transaction == null) throw new TransactionNotFoundException("Transaction with id:" + id + " not found");
         return transaction;
     }
 

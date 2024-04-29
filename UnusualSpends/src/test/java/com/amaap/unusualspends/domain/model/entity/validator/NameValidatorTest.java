@@ -1,17 +1,14 @@
 package com.amaap.unusualspends.domain.model.entity.validator;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.amaap.unusualspends.domain.model.entity.validator.EmailValidator.*;
 import static com.amaap.unusualspends.domain.model.entity.validator.NameValidator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NameValidatorTest {
 
     @Test
-    void shouldBeAbleToValidateValidNameOfCustomer()
-    {
+    void shouldBeAbleToValidateValidNameOfCustomer() {
         assertTrue(isValidName("Ashok Pawar"));
         assertTrue(isValidName("Ash Paw"));
     }
@@ -27,8 +24,9 @@ class NameValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToValidateIncorrectNameOfCustomer()
-    {
+    void shouldBeAbleToValidateIncorrectNameOfCustomer() {
+        assertFalse(isValidName(null));
+        assertFalse(isValidName(""));
         assertFalse(isValidName("A b"));
         assertFalse(isValidName("A ab"));
         assertFalse(isValidName("A abc"));
@@ -46,8 +44,7 @@ class NameValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToCreateInstanceOfClass()
-    {
+    void shouldBeAbleToCreateInstanceOfClass() {
         // arrange
         NameValidator nameValidator = new NameValidator();
 

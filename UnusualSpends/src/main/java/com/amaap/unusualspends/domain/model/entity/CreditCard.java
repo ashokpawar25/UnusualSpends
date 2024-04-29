@@ -9,7 +9,7 @@ public class CreditCard {
     private Customer customer;
 
     public CreditCard(int id) throws InvalidCreditCardIdException {
-        if(id <= 0) throw new InvalidCreditCardIdException("Id of credit card should be greater than 0");
+        if (id <= 0) throw new InvalidCreditCardIdException("Id of credit card should be greater than 0");
         this.id = id;
     }
 

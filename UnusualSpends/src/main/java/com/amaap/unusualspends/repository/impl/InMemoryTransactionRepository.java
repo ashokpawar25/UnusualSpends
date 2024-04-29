@@ -3,11 +3,14 @@ package com.amaap.unusualspends.repository.impl;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.repository.TransactionRepository;
 import com.amaap.unusualspends.repository.db.InMemoryDatabase;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
 public class InMemoryTransactionRepository implements TransactionRepository {
     InMemoryDatabase inMemoryDatabase;
+
+    @Inject
     public InMemoryTransactionRepository(InMemoryDatabase inMemoryDatabase) {
         this.inMemoryDatabase = inMemoryDatabase;
     }

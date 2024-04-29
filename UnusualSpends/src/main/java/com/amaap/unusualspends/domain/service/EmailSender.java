@@ -8,7 +8,6 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
@@ -17,9 +16,9 @@ import static com.amaap.unusualspends.domain.model.entity.validator.EmailValidat
 
 public class EmailSender {
     public static void sendEmail(String subject, String body, String email) throws InvalidEmailIdException, InvalidEmailBodyException, InvalidEmailSubjectException {
-        if (!isValidEmail(email)) throw new InvalidEmailIdException("Invalid email id:"+email);
+        if (!isValidEmail(email)) throw new InvalidEmailIdException("Invalid email id:" + email);
         if (body == null || body.isEmpty()) throw new InvalidEmailBodyException("Email body should have content");
-        if(subject == null || subject.isEmpty()) throw new InvalidEmailSubjectException("Email subject is must");
+        if (subject == null || subject.isEmpty()) throw new InvalidEmailSubjectException("Email subject is must");
         String fromEmail = "ashokpawar8020@gmail.com";
         String toEmail = email;
         String password = "taaf sqgr jhzd hcwb";

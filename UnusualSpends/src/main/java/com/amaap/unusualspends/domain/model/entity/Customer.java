@@ -11,9 +11,9 @@ import static com.amaap.unusualspends.domain.model.entity.validator.EmailValidat
 import static com.amaap.unusualspends.domain.model.entity.validator.NameValidator.isValidName;
 
 public class Customer {
-    private int id;
     private final String name;
     private final String email;
+    private int id;
 
     public Customer(int id, String name, String email) {
         this.id = id;

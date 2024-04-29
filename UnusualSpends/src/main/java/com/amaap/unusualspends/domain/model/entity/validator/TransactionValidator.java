@@ -7,16 +7,15 @@ import java.util.EnumSet;
 
 public class TransactionValidator {
     public static boolean isValidCardId(int cardId) {
-        return cardId>0;
+        return cardId > 0;
     }
 
-    public static boolean isValidId(int id)
-    {
-        return id>0;
+    public static boolean isValidId(int id) {
+        return id > 0;
     }
 
     public static boolean isValidAmount(double amount) {
-        return amount>0;
+        return amount > 0;
     }
 
     public static boolean isValidCategory(Category category) {
